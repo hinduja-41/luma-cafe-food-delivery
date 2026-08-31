@@ -8,7 +8,7 @@
    BACKEND API
 ========================================= */
 
-const API_URL = "http://localhost:5000/api/menu";
+const API_URL = "http://https://lluma-cafe-backend.onrender.com//api/menu";
 
 
 /* =========================================
@@ -936,7 +936,7 @@ if (!customerId) {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/orders",
+            "https://lluma-cafe-backend.onrender.com/api/orders",
             {
 
                 method: "POST",
@@ -998,7 +998,7 @@ if (!customerId) {
             try {
 
                 const statusResponse = await fetch(
-                    `http://localhost:5000/api/orders/${result.orderId}`
+                    `https://lluma-cafe-backend.onrender.com/api/orders/${result.orderId}`
                 );
 
 
@@ -1098,7 +1098,7 @@ function startOrderStatusTracking(orderId) {
         try {
 
             const response = await fetch(
-                `http://localhost:5000/api/orders/${orderId}`
+                `https://lluma-cafe-backend.onrender.com/api/orders/${orderId}`
             );
 
 
@@ -1260,7 +1260,7 @@ async function loadMyOrders() {
         // =========================================
 
         const response = await fetch(
-            `http://localhost:5000/api/orders/customer/${customerId}`
+            `https://lluma-cafe-backend.onrender.com/api/orders/customer/${customerId}`
         );
 
 
@@ -1412,7 +1412,7 @@ async function loadMyOrders() {
 
                             const response =
                                 await fetch(
-                                    `http://localhost:5000/api/orders/${order.id}/cancel`,
+                                    `https://lluma-cafe-backend.onrender.com/api/orders/${order.id}/cancel`,
                                     {
                                         method: "PUT"
                                     }
