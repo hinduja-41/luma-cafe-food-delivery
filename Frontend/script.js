@@ -8,7 +8,7 @@
    BACKEND API
 ========================================= */
 
-const API_URL = "https://lluma-cafe-backend.onrender.com//api/menu";
+const API_URL = "https://lluma-cafe-backend.onrender.com/api/menu";
 
 
 /* =========================================
