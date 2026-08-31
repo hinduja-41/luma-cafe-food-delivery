@@ -33,26 +33,26 @@ const db = mysql.createPool({
 // TEST DATABASE CONNECTION
 // =========================================
 
-async function testDatabaseConnection() {
-
+async function startServer() {
     try {
-
         const connection = await db.getConnection();
 
         console.log("MySQL database connected successfully! ✅");
 
         connection.release();
 
-    } catch (error) {
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`Server running on port ${PORT}`);
+        });
 
+    } catch (error) {
         console.error("MySQL connection failed ❌");
         console.error(error.message);
-
+        process.exit(1);
     }
-
 }
 
-testDatabaseConnection();
+startServer();
 
 
 // =========================================
