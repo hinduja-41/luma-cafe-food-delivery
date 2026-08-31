@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Luma Café - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+    <header class="admin-header">
+
+    <div>
+        <span>LUMA CAFÉ</span>
+        <h1>Admin Dashboard</h1>
+    </div>
+
+
+    <div class="admin-header-right">
+
+        <span id="adminWelcome">
+            👋 Admin
+        </span>
+
+        <button id="adminLogoutBtn">
+            Logout
+        </button>
+
+        <a href="index.html">
+            ← Back to Website
+        </a>
+
+    </div>
+
+</header>
+
+
+    <main class="admin-container">
+
+        <div class="dashboard-heading">
+
+            <div>
+                <span class="label">ORDERS</span>
+                <h2>Customer Orders</h2>
+            </div>
+
+            <button id="refreshOrders">
+                ↻ Refresh
+            </button>
+
+        </div>
+        <!-- =========================================
+     DASHBOARD STATISTICS
+========================================= -->
+
+<div class="dashboard-stats">
+
+    <div class="stat-card">
+
+        <span>Total Orders</span>
+
+        <strong id="totalOrders">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>Pending Orders</span>
+
+        <strong id="pendingOrders">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>Delivered Orders</span>
+
+        <strong id="deliveredOrders">
+            0
+        </strong>
+
+    </div>
+
+</div>
+
+<!-- =========================================
+     ORDER FILTERS
+========================================= -->
+
+<div class="order-filters">
+
+    <button class="filter-btn active" data-status="All">
+        All
+    </button>
+
+    <button class="filter-btn" data-status="Pending">
+        Pending
+    </button>
+
+    <button class="filter-btn" data-status="Preparing">
+        Preparing
+    </button>
+
+    <button class="filter-btn" data-status="Out for Delivery">
+        Out for Delivery
+    </button>
+
+    <button class="filter-btn" data-status="Delivered">
+        Delivered
+    </button>
+
+</div>
+<!-- =========================================
+     SEARCH ORDERS
+========================================= -->
+
+<div class="order-search">
+
+    <input
+        type="text"
+        id="orderSearch"
+        placeholder="🔍 Search by order number, customer name or phone..."
+    >
+
+</div>
+        <!-- Orders will appear here -->
+
+        <div id="ordersContainer">
+
+            <p class="loading">
+                Loading orders...
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

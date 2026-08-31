@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Luma Café | Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f8f5ef;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 450px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 10px;
+        }
+
+
+        .logo h1 {
+
+            color: #e85d25;
+
+            font-size: 32px;
+        }
+
+
+        .logo p {
+
+            color: #777;
+
+            margin-top: 5px;
+        }
+
+
+        .login-container h2 {
+
+            text-align: center;
+
+            margin: 25px 0;
+
+            color: #333;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #444;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #e85d25;
+        }
+
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #e85d25;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+
+        .login-btn:hover {
+
+            opacity: 0.9;
+        }
+
+
+        .message {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-size: 14px;
+        }
+
+
+        .signup-link {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #666;
+        }
+
+
+        .signup-link a {
+
+            color: #e85d25;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        @media (max-width: 500px) {
+
+            .login-container {
+
+                padding: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+
+        <div class="logo">
+
+            <h1>LUMA</h1>
+
+            <p>Café & Kitchen</p>
+
+        </div>
+
+
+        <h2>Welcome Back</h2>
+
+
+        <form id="loginForm">
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                Login
+
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+        <div class="signup-link">
+
+            Don't have an account?
+
+            <a href="signup.html">
+                Create Account
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+
+        loginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                const message =
+                    document.getElementById(
+                        "message"
+                    );
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/customers/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        message.textContent =
+                            data.error ||
+                            "Invalid email or password.";
+
+                        message.style.color =
+                            "red";
+
+                        return;
+                    }
+
+
+                    // Save logged-in customer
+                    localStorage.setItem(
+                        "customerId",
+                        data.customer.id
+                    );
+
+                    localStorage.setItem(
+                        "customerName",
+                        data.customer.name
+                    );
+
+                    localStorage.setItem(
+                        "customerEmail",
+                        data.customer.email
+                    );
+
+                    localStorage.setItem(
+                        "customerPhone",
+                        data.customer.phone
+                    );
+
+
+                    message.textContent =
+                        "Login successful! ✅";
+
+                    message.style.color =
+                        "green";
+
+
+                    setTimeout(() => {
+
+                        window.location.href =
+                            "index.html";
+
+                    }, 1000);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        "Unable to connect to server.";
+
+                    message.style.color =
+                        "red";
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

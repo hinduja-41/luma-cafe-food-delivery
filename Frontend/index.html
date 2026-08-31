@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Luma Café | Crafted With Passion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header" id="header">
+
+    <div class="container nav-container">
+
+        <a href="#" class="logo">
+            <span class="logo-icon">L</span>
+            <span>
+                <strong>LUMA</strong>
+                <small>CAFÉ & KITCHEN</small>
+            </span>
+        </a>
+
+        <nav class="nav" id="nav">
+
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#menu" class="nav-link">Menu</a>
+            <a href="#story" class="nav-link">Our Story</a>
+            <a href="#specials" class="nav-link">Specials</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="login.html" class="nav-link" id="loginBtn">
+    Login
+</a>
+            <a href="#myOrders" class="nav-link" id="myOrdersBtn">
+    My Orders
+
+</a>
+  <span class="nav-link" id="customerWelcome"></span>
+     <button class="nav-link" id="logoutBtn">
+    Logout
+</button>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+                ☾
+            </button>
+
+            <button class="cart-btn" id="cartBtn">
+                <span>🛒</span>
+                <b id="cartCount">0</b>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-text reveal">
+
+            <span class="eyebrow">
+                ✦ WELCOME TO LUMA
+            </span>
+
+            <h1>
+                Good food.
+                <span>Good mood.</span>
+            </h1>
+
+            <p>
+                A modern café where handcrafted flavours,
+                beautiful moments and warm hospitality come together.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#menu" class="btn btn-primary">
+                    Explore Our Menu
+                    <span>→</span>
+                </a>
+
+                <a href="#story" class="btn btn-outline">
+                    Our Story
+                </a>
+
+            </div>
+
+            <div class="hero-stats">
+
+                <div>
+                    <strong>4.9</strong>
+                    <span>★ Google Rating</span>
+                </div>
+
+                <div>
+                    <strong>12+</strong>
+                    <span>Years of Passion</span>
+                </div>
+
+                <div>
+                    <strong>40+</strong>
+                    <span>Signature Dishes</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scroll-indicator">
+        <span>SCROLL TO EXPLORE</span>
+        <div></div>
+    </div>
+
+</section>
+
+
+<!-- ================= INTRO ================= -->
+
+<section class="intro section">
+
+    <div class="container intro-grid">
+
+        <div class="intro-image reveal">
+
+            <img
+                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=85"
+                alt="Luma Cafe interior"
+            >
+
+            <div class="image-badge">
+                <strong>2012</strong>
+                <span>Serving happiness</span>
+            </div>
+
+        </div>
+
+        <div class="intro-content reveal">
+
+            <span class="section-label">THE LUMA EXPERIENCE</span>
+
+            <h2>
+                Made with care.
+                <em>Served with love.</em>
+            </h2>
+
+            <p>
+                At Luma, we believe food should be more than something
+                you eat. It should be an experience you remember.
+            </p>
+
+            <p>
+                From our freshly baked pizzas to our carefully brewed
+                coffee, every plate is prepared with quality ingredients,
+                creativity and a little bit of Luma magic.
+            </p>
+
+            <a href="#story" class="text-link">
+                Discover our story <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MENU ================= -->
+
+<section class="menu-section section" id="menu">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div>
+                <span class="section-label">OUR MENU</span>
+
+                <h2>
+                    Something for
+                    <em>every craving.</em>
+                </h2>
+            </div>
+
+            <p>
+                Fresh ingredients. Bold flavours.
+                Crafted just for you.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="menu-tools reveal">
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search your favourite dish..."
+                >
+
+            </div>
+
+            <div class="category-list" id="categoryList">
+
+                <button class="category active" data-category="all">
+                    All
+                </button>
+
+                <button class="category" data-category="pizza">
+                    🍕 Pizza
+                </button>
+
+                <button class="category" data-category="burger">
+                    🍔 Burgers
+                </button>
+
+                <button class="category" data-category="pasta">
+                    🍝 Pasta
+                </button>
+
+                <button class="category" data-category="dessert">
+                    🍰 Desserts
+                </button>
+
+                <button class="category" data-category="drinks">
+                    ☕ Drinks
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU GRID -->
+
+        <div class="menu-grid" id="menuGrid"></div>
+
+        <div class="empty-state" id="emptyState">
+            <div>🍽️</div>
+            <h3>No dishes found</h3>
+            <p>Try another search or category.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SPECIAL OFFER ================= -->
+
+<section class="special-section" id="specials">
+
+    <div class="container">
+
+        <div class="special-card reveal">
+
+            <div class="special-content">
+
+                <span class="section-label">THIS WEEKEND</span>
+
+                <h2>
+                    A little extra
+                    <em>never hurts.</em>
+                </h2>
+
+                <p>
+                    Enjoy any two main dishes and receive
+                    our signature dessert on the house.
+                </p>
+
+                <button class="btn btn-light" onclick="scrollToMenu()">
+                    Explore the offer →
+                </button>
+
+            </div>
+
+            <div class="special-decoration">
+                <span>20%</span>
+                <small>OFF</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STORY ================= -->
+
+<section class="story section" id="story">
+
+    <div class="container story-grid">
+
+        <div class="story-content reveal">
+
+            <span class="section-label">OUR STORY</span>
+
+            <h2>
+                From a small dream
+                <em>to your favourite table.</em>
+            </h2>
+
+            <p>
+                Luma started with one simple idea:
+                create a place where people could slow down,
+                enjoy beautiful food and spend time together.
+            </p>
+
+            <p>
+                Today, that same idea lives in every dish,
+                every cup of coffee and every conversation
+                around our tables.
+            </p>
+
+            <div class="signature">
+                <span>Made with love</span>
+                <strong>Luma Family</strong>
+            </div>
+
+        </div>
+
+        <div class="story-images reveal">
+
+            <img
+                class="story-main"
+                src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=85"
+                alt="Restaurant dining"
+            >
+
+            <img
+                class="story-small"
+                src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=700&q=85"
+                alt="Fresh food"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TESTIMONIAL ================= -->
+
+<section class="reviews section">
+
+    <div class="container">
+
+        <div class="section-heading centered reveal">
+
+            <span class="section-label">CUSTOMER LOVE</span>
+
+            <h2>
+                What our guests
+                <em>say.</em>
+            </h2>
+
+        </div>
+
+        <div class="review-grid">
+
+            <article class="review-card reveal">
+
+                <div class="stars">★★★★★</div>
+
+                <p>
+                    “Absolutely beautiful place. The food,
+                    ambience and service were all amazing.
+                    The truffle pasta is a must try!”
+                </p>
+
+                <strong>Priya M.</strong>
+                <span>Regular Guest</span>
+
+            </article>
+
+            <article class="review-card reveal">
+
+                <div class="stars">★★★★★</div>
+
+                <p>
+                    “One of the best cafés in town.
+                    Everything feels thoughtfully designed,
+                    from the menu to the smallest details.”
+                </p>
+
+                <strong>Arjun K.</strong>
+                <span>Food Enthusiast</span>
+
+            </article>
+
+            <article class="review-card reveal">
+
+                <div class="stars">★★★★★</div>
+
+                <p>
+                    “The coffee is fantastic and the desserts
+                    are even better. Luma has become our
+                    weekend ritual.”
+                </p>
+
+                <strong>Meera R.</strong>
+                <span>Happy Guest</span>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact">
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <a href="#" class="logo footer-logo">
+
+                <span class="logo-icon">L</span>
+
+                <span>
+                    <strong>LUMA</strong>
+                    <small>CAFÉ & KITCHEN</small>
+                </span>
+
+            </a>
+
+            <p>
+                Crafted food. Warm moments.
+                Beautiful memories.
+            </p>
+
+            <div class="socials">
+
+                <a href="#">ig</a>
+                <a href="#">f</a>
+                <a href="#">x</a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Explore</h4>
+
+            <a href="#menu">Menu</a>
+            <a href="#specials">Specials</a>
+            <a href="#story">Our Story</a>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Visit Us</h4>
+
+            <p>21, MG Road</p>
+            <p>Chennai, Tamil Nadu</p>
+            <p>Mon – Sun · 10 AM – 11 PM</p>
+
+        </div>
+
+        <div class="footer-column">
+
+            <h4>Contact</h4>
+
+            <a href="tel:+919876543210">+91 98765 43210</a>
+            <a href="mailto:hello@lumacafe.com">
+                hello@lumacafe.com
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>© 2026 Luma Café. Crafted with passion.</p>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= FOOD MODAL ================= -->
+
+<div class="modal" id="foodModal">
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-content">
+
+        <button class="modal-close" id="modalClose">
+            ×
+        </button>
+
+        <img id="modalImage" src="" alt="">
+
+        <div class="modal-info">
+
+            <span class="section-label" id="modalCategory"></span>
+
+            <h2 id="modalTitle"></h2>
+
+            <div class="modal-rating">
+                ★★★★★ <span>4.9</span>
+            </div>
+
+            <p id="modalDescription"></p>
+
+            <div class="modal-bottom">
+
+                <strong id="modalPrice"></strong>
+
+                <button class="btn btn-primary" id="modalAdd">
+                    Add to cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<aside class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+        <div>
+            <span class="section-label">YOUR ORDER</span>
+            <h3>Shopping Cart</h3>
+        </div>
+
+        <button id="closeCart">×</button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="cart-empty">
+
+            <div>🛍️</div>
+
+            <h4>Your cart is empty</h4>
+
+            <p>Add something delicious.</p>
+
+        </div>
+
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>Total</span>
+            <strong id="cartTotal">₹0</strong>
+
+        </div>
+
+        <button class="checkout-btn" id="checkoutBtn">
+            Proceed to Checkout →
+        </button>
+
+    </div>
+
+</aside>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<!-- ================= CHECKOUT ================= -->
+
+<div class="checkout-modal" id="checkoutModal">
+
+    <div class="checkout-overlay" id="checkoutOverlay"></div>
+
+    <div class="checkout-content">
+
+        <button class="checkout-close" id="checkoutClose">×</button>
+
+        <div class="checkout-header">
+            <span class="section-label">LUMA CAFÉ</span>
+            <h2>Complete your <em>order.</em></h2>
+            <p>Enter your details and we'll prepare your order with care.</p>
+        </div>
+
+        <form id="checkoutForm">
+
+            <div class="form-group">
+                <label for="customerName">Full Name</label>
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="customerPhone">Phone Number</label>
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="Enter your phone number"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="customerAddress">Delivery Address</label>
+                <textarea
+                    id="customerAddress"
+                    rows="4"
+                    placeholder="Enter your complete delivery address"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="checkout-summary">
+                <span>Order Total</span>
+                <strong id="checkoutTotal">₹0</strong>
+            </div>
+
+            <button type="submit" class="checkout-submit">
+                Place Order →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+<!-- ================= ORDER SUCCESS ================= -->
+
+<div class="order-success-modal" id="orderSuccessModal">
+
+    <div class="order-success-overlay"></div>
+
+    <div class="order-success-content">
+
+        <div class="success-icon">✓</div>
+
+        <span class="section-label">LUMA CAFÉ</span>
+
+        <h2>Order <em>confirmed.</em></h2>
+
+        <p class="success-message">
+            Thank you for your order! We have received your
+            request and will start preparing it shortly.
+        </p>
+
+        <div class="order-details">
+
+            <div>
+                <span>Order ID</span>
+                <strong id="successOrderId">#0</strong>
+            </div>
+
+            <div>
+                <span>Total</span>
+                <strong id="successOrderTotal">₹0</strong>
+            </div>
+
+        </div>
+        <!-- Order Status -->
+
+<div class="order-status-box">
+
+    <span>Current Status</span>
+
+    <strong id="successOrderStatus">
+        Pending
+    </strong>
+
+</div>
+
+
+        <button class="success-continue" id="successContinue">
+            Continue Shopping →
+        </button>
+
+    </div>
+
+</div>
+<!-- =========================================
+     MY ORDERS
+========================================= -->
+
+<section class="my-orders" id="myOrders">
+
+    <div class="my-orders-container">
+
+        <div class="my-orders-header">
+            <span>YOUR ORDERS</span>
+            <h2>My Orders</h2>
+            <p>View your recent orders and their current status.</p>
+        </div>
+
+        <div id="ordersList" class="orders-list">
+
+            <p class="orders-loading">
+                Loading your orders...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast">
+
+    <span>✓</span>
+
+    <div>
+        <strong>Added to cart</strong>
+        <small id="toastText"></small>
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
