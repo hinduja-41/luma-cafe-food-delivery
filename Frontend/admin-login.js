@@ -30,7 +30,7 @@ adminLoginForm.addEventListener(
         try {
 
             const response = await fetch(
-                "https://luma-cafe-backend.onrender.com/api/admin/login",
+                "https://lluma-cafe-backend.onrender.com/api/admin/login",
                 {
                     method: "POST",
 

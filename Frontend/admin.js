@@ -78,7 +78,7 @@ async function loadOrders() {
     try {
 
         const response = await fetch(
-            "https://luma-cafe-backend.onrender.com/api/orders"
+            "https://lluma-cafe-backend.onrender.com/api/orders"
         );
 
         if (!response.ok) {
@@ -369,7 +369,7 @@ ordersContainer.addEventListener("change", async (event) => {
     try {
 
         const response = await fetch(
-            `https://luma-cafe-backend.onrender.com/api/orders/${orderId}/status`,
+            `https://lluma-cafe-backend.onrender.com/api/orders/${orderId}/status`,
             {
                 method: "PUT",
 
