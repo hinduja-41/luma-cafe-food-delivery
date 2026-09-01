@@ -14,9 +14,23 @@ const app = express();
 // MIDDLEWARE
 // =========================================
 
-app.use(cors());
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
 
-app.options(/.*/, cors());
+    if (origin) {
+        res.header("Access-Control-Allow-Origin", origin);
+    }
+
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+
+    next();
+});
 
 app.use(express.json());
 
