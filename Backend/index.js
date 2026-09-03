@@ -1,46 +1,37 @@
 require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
+
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-// =========================================
-// MIDDLEWARE
-// =========================================
 
 // =========================================
 // MIDDLEWARE
 // =========================================
 
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
+const corsOptions = {
+    origin: [
+        "http://127.0.0.1:5500",
+        "http://localhost:5500"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+};
 
-    if (origin) {
-        res.header("Access-Control-Allow-Origin", origin);
-    }
-
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.header("Access-Control-Allow-Credentials", "true");
-
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(204);
-    }
-
-    next();
-});
+app.use(cors(corsOptions));
 
 app.use(express.json());
-
-
-
 
 
 // =========================================
 // MYSQL DATABASE CONNECTION
 // =========================================
+
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -58,7 +49,9 @@ const db = mysql.createPool({
 // =========================================
 
 async function startServer() {
+
     try {
+
         const connection = await db.getConnection();
 
         console.log("MySQL database connected successfully! ✅");
@@ -70,13 +63,13 @@ async function startServer() {
         });
 
     } catch (error) {
+
         console.error("MySQL connection failed ❌");
         console.error(error.message);
+
         process.exit(1);
     }
 }
-
-startServer();
 
 
 // =========================================
@@ -107,7 +100,10 @@ app.get("/api/menu", async (req, res) => {
 
     } catch (error) {
 
-        console.error("Error fetching menu:", error.message);
+        console.error(
+            "Error fetching menu:",
+            error.message
+        );
 
         res.status(500).json({
             error: "Failed to fetch menu"
@@ -116,6 +112,8 @@ app.get("/api/menu", async (req, res) => {
     }
 
 });
+
+
 // =========================================
 // ORDERS API
 // GET ALL ORDERS
@@ -146,10 +144,6 @@ app.get("/api/orders", async (req, res) => {
 
 });
 
-// =========================================
-// ORDER API
-// SAVE CUSTOMER ORDER TO MYSQL
-// =========================================
 
 // =========================================
 // ORDER API
@@ -171,6 +165,7 @@ app.post("/api/orders", async (req, res) => {
 
 
         // Validate required fields
+
         if (
             !customer_id ||
             !customer_name ||
@@ -189,6 +184,7 @@ app.post("/api/orders", async (req, res) => {
 
 
         // Insert order into MySQL
+
         const [result] = await db.query(
             `INSERT INTO orders
             (customer_id, customer_name, customer_phone, customer_address, items, total_amount)
@@ -205,6 +201,7 @@ app.post("/api/orders", async (req, res) => {
 
 
         // Send success response
+
         res.status(201).json({
 
             message: "Order placed successfully! 🎉",
@@ -212,7 +209,6 @@ app.post("/api/orders", async (req, res) => {
             orderId: result.insertId
 
         });
-
 
     } catch (error) {
 
@@ -228,6 +224,8 @@ app.post("/api/orders", async (req, res) => {
     }
 
 });
+
+
 // =========================================
 // UPDATE ORDER STATUS
 // =========================================
@@ -237,6 +235,7 @@ app.put("/api/orders/:id/status", async (req, res) => {
     try {
 
         const orderId = req.params.id;
+
         const { status } = req.body;
 
         const allowedStatuses = [
@@ -246,6 +245,7 @@ app.put("/api/orders/:id/status", async (req, res) => {
             "Delivered"
         ];
 
+
         if (!allowedStatuses.includes(status)) {
 
             return res.status(400).json({
@@ -254,10 +254,12 @@ app.put("/api/orders/:id/status", async (req, res) => {
 
         }
 
+
         await db.query(
             "UPDATE orders SET status = ? WHERE id = ?",
             [status, orderId]
         );
+
 
         res.json({
             message: "Order status updated successfully"
@@ -277,6 +279,8 @@ app.put("/api/orders/:id/status", async (req, res) => {
     }
 
 });
+
+
 // =========================================
 // GET SINGLE ORDER
 // =========================================
@@ -292,6 +296,7 @@ app.get("/api/orders/:id", async (req, res) => {
             [orderId]
         );
 
+
         if (rows.length === 0) {
 
             return res.status(404).json({
@@ -299,6 +304,7 @@ app.get("/api/orders/:id", async (req, res) => {
             });
 
         }
+
 
         res.json(rows[0]);
 
@@ -316,6 +322,8 @@ app.get("/api/orders/:id", async (req, res) => {
     }
 
 });
+
+
 // =========================================
 // GET CUSTOMER ORDER HISTORY
 // =========================================
@@ -341,6 +349,7 @@ app.get("/api/orders/customer/:customerId", async (req, res) => {
              ORDER BY id DESC`,
             [customerId]
         );
+
 
         res.json(rows);
 
@@ -375,7 +384,9 @@ app.post("/api/customers/signup", async (req, res) => {
             password
         } = req.body;
 
+
         // Check required fields
+
         if (!name || !email || !phone || !password) {
 
             return res.status(400).json({
@@ -384,13 +395,16 @@ app.post("/api/customers/signup", async (req, res) => {
 
         }
 
+
         // Check whether email or phone already exists
+
         const [existingCustomer] = await db.query(
             `SELECT id
              FROM customers
              WHERE email = ? OR phone = ?`,
             [email, phone]
         );
+
 
         if (existingCustomer.length > 0) {
 
@@ -400,7 +414,9 @@ app.post("/api/customers/signup", async (req, res) => {
 
         }
 
+
         // Create new customer
+
         const [result] = await db.query(
             `INSERT INTO customers
                 (name, email, phone, password)
@@ -408,9 +424,13 @@ app.post("/api/customers/signup", async (req, res) => {
             [name, email, phone, password]
         );
 
+
         res.status(201).json({
+
             message: "Account created successfully",
+
             customerId: result.insertId
+
         });
 
     } catch (error) {
@@ -442,7 +462,9 @@ app.post("/api/customers/login", async (req, res) => {
             password
         } = req.body;
 
+
         // Check required fields
+
         if (!email || !password) {
 
             return res.status(400).json({
@@ -451,7 +473,9 @@ app.post("/api/customers/login", async (req, res) => {
 
         }
 
+
         // Find customer by email
+
         const [rows] = await db.query(
             `SELECT id, name, email, phone, password
              FROM customers
@@ -459,7 +483,9 @@ app.post("/api/customers/login", async (req, res) => {
             [email]
         );
 
+
         // Customer not found
+
         if (rows.length === 0) {
 
             return res.status(401).json({
@@ -468,9 +494,12 @@ app.post("/api/customers/login", async (req, res) => {
 
         }
 
+
         const customer = rows[0];
 
+
         // Check password
+
         if (customer.password !== password) {
 
             return res.status(401).json({
@@ -479,12 +508,18 @@ app.post("/api/customers/login", async (req, res) => {
 
         }
 
+
         // Don't send password to browser
+
         delete customer.password;
 
+
         res.json({
+
             message: "Login successful",
+
             customer: customer
+
         });
 
     } catch (error) {
@@ -502,6 +537,7 @@ app.post("/api/customers/login", async (req, res) => {
 
 });
 
+
 // =========================================
 // ADMIN LOGIN
 // =========================================
@@ -517,6 +553,7 @@ app.post("/api/admin/login", async (req, res) => {
 
 
         // Check required fields
+
         if (!email || !password) {
 
             return res.status(400).json({
@@ -527,6 +564,7 @@ app.post("/api/admin/login", async (req, res) => {
 
 
         // Find admin by email
+
         const [rows] = await db.query(
             `SELECT id, name, email, password
              FROM admins
@@ -536,6 +574,7 @@ app.post("/api/admin/login", async (req, res) => {
 
 
         // Admin not found
+
         if (rows.length === 0) {
 
             return res.status(401).json({
@@ -549,6 +588,7 @@ app.post("/api/admin/login", async (req, res) => {
 
 
         // Check password
+
         if (admin.password !== password) {
 
             return res.status(401).json({
@@ -559,14 +599,17 @@ app.post("/api/admin/login", async (req, res) => {
 
 
         // Don't send password to browser
+
         delete admin.password;
 
 
         res.json({
-            message: "Admin login successful",
-            admin: admin
-        });
 
+            message: "Admin login successful",
+
+            admin: admin
+
+        });
 
     } catch (error) {
 
@@ -575,7 +618,6 @@ app.post("/api/admin/login", async (req, res) => {
             error.message
         );
 
-
         res.status(500).json({
             error: "Failed to login as admin"
         });
@@ -583,6 +625,7 @@ app.post("/api/admin/login", async (req, res) => {
     }
 
 });
+
 
 // =========================================
 // CANCEL ORDER
@@ -594,6 +637,7 @@ app.put("/api/orders/:id/cancel", async (req, res) => {
 
         const orderId = req.params.id;
 
+
         const [result] = await db.query(
             `UPDATE orders
              SET status = 'Cancelled'
@@ -601,6 +645,7 @@ app.put("/api/orders/:id/cancel", async (req, res) => {
              AND status = 'Pending'`,
             [orderId]
         );
+
 
         if (result.affectedRows === 0) {
 
@@ -610,6 +655,7 @@ app.put("/api/orders/:id/cancel", async (req, res) => {
             });
 
         }
+
 
         res.json({
             message:
@@ -637,3 +683,4 @@ app.put("/api/orders/:id/cancel", async (req, res) => {
 // START SERVER
 // =========================================
 
+startServer();
